@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Clone</title>
+    <script src="https://kit.fontawesome.com/8e28a5d788.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav id="navbar">
+        <div id="logoLinesDiv">
+            <i class="fa-solid fa-bars youtubeMenuLogo"></i>
+            <i class="fa-brands fa-youtube youtubeLogo"></i>
+        </div>
+        
+        <div id="searchAudioDiv">
+            <div id="searchbarLogo">
+                <input id="query" placeholder="Search" aria-label="Search">
+                <button id="searchLogoDiv" onclick="search()">
+                    <i class="fa-solid fa-magnifying-glass searchLogo"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="otherLogo">
+            <i class="fa-solid fa-bell"></i>
+            <i class="fa-solid fa-user"></i>
+        </div>
+    </nav>
+    <!-- Navbar ends here -->
+
+    <!-- Video Section -->
+    <main id="videos">
+        <!-- Videos will be dynamically loaded here -->
+    </main>
+
+    <script src="index.js"></script>
+</body>
+</html>
