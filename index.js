@@ -4,7 +4,7 @@ const search = async () => {
         const query = document.getElementById("query").value.trim();
         if (!query) return; // Prevent empty searches
 
-        const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${query}&key=AIzaSyDVk2mh02wxr_2df0e76Vbb2EZAMDml67E`;
+        const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${query}&key=AIzaSyA5GDTr2JVtyk7iqVuasbhlEkMFr-l74n8`;
 
         const res = await fetch(url);
         const data = await res.json();
