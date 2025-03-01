@@ -15,7 +15,7 @@
 }
 
 /* Left Section: Menu & Logo */
-#LogoLinesDiv {
+#logoLinesDiv {
     display: flex;
     align-items: center;
     gap: 20px;
@@ -23,7 +23,7 @@
 
 /* Menu Icon */
 .youtubeMenuIcon {
-    font-size: 25px;
+    font-size: 24px;
     color: #606060;
     cursor: pointer;
     transition: 0.2s;
@@ -55,10 +55,10 @@
 #searchContainer {
     display: flex;
     align-items: center;
-    border: 1px solid #ccc;
-    width: 600px;
-    height: 40px;
-    border-radius: 50px;
+    border: 1px solid gray;
+    width: 1000px;
+    height: 100px;
+    border-radius: 100px;
     overflow: hidden;
     background-color: white;
 }
@@ -67,37 +67,35 @@
 #searchInput {
     flex: 1;
     border: none;
-    padding: 10px 16px;
+    padding: 10px;
     font-size: 16px;
     outline: none;
     background: none;
-    width: 100%;
 }
 
 /* Search Button */
 #searchButton {
-    border-left: 1px solid #ccc;
+    border-left: 1px solid gray;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 64px;
-    height: 100%;
-    background-color: #f8f8f8;
+    width: 100px;
+    background-color: rgb(241, 241, 241);
     cursor: pointer;
-    transition: background 0.2s;
+    transition: 0.2s;
 }
 #searchButton:hover {
-    background-color: #e0e0e0;
+    background-color: rgb(230, 230, 230);
 }
 
 /* Search Icon */
 .searchIcon {
-    font-size: 24px;
-    color: #606060;
+    font-size: 22px;
+    color: gray;
 }
 
-/* Right Section (For Future Icons) */
-#rightSection {
+/* Right Section (For Icons) */
+#rightIcons {
     display: flex;
     align-items: center;
     gap: 20px;
@@ -114,7 +112,7 @@
     #searchContainer {
         width: 250px;
     }
-    #rightSection {
+    #rightIcons {
         display: none;
     }
-}
+}  
