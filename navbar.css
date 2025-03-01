@@ -1,12 +1,12 @@
 /* Navbar container */
 #navbar {
-    height: 56px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 16px;
     background-color: white;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 0.5px solid #ddd;
     position: fixed;
     top: 0;
     left: 0;
