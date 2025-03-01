@@ -1,118 +1,73 @@
-/* Navbar container */
-#navbar {
-    height: 56px;
+#navbar{
+    height: 80px;
+    border-top: 0.5px solid gray;
+    border-bottom: 0.5px solid gray;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    background-color: white;
+}
+
+#logoLinesDiv{
+    width: 180px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 16px;
-    background-color: white;
-    border-bottom: 1px solid #ddd;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
+    gap: 15px;
 }
 
-/* Left Section: Menu & Logo */
-#logoLinesDiv {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+.youtubeLogo{
+    color: red;
+    font-size: 35px;
+    cursor: pointer;
 }
 
-/* Menu Icon */
-.youtubeMenuIcon {
-    font-size: 24px;
+.youtubeMenuLogo{
+    font-size: 25px;
     color: #606060;
     cursor: pointer;
-    transition: 0.2s;
-}
-.youtubeMenuIcon:hover {
-    color: black;
 }
 
-/* YouTube Logo */
-.youtubeLogo {
-    color: red;
-    font-size: 32px;
-    font-weight: bold;
-    cursor: pointer;
+#searchAudioDiv{
+    margin-left: auto;
     display: flex;
     align-items: center;
-    gap: 5px;
 }
 
-/* Search Bar Section */
-#searchAudioDiv {
+/* Div which contains input and search logo div */
+#searchbarLogo{
     display: flex;
-    align-items: center;
-    flex-grow: 1;
-    justify-content: center;
-}
-
-/* Search Bar Container */
-#searchContainer {
-    display: flex;
-    align-items: center;
     border: 1px solid gray;
-    width: 1000px;
-    height: 100px;
-    border-radius: 100px;
+    width: 500px;
+    height: 40px;
+    border-radius: 20px;
     overflow: hidden;
     background-color: white;
 }
 
-/* Input Field */
-#searchInput {
-    flex: 1;
+/* Input field */
+#query{
     border: none;
+    width: 85%;
     padding: 10px;
     font-size: 16px;
     outline: none;
-    background: none;
 }
 
-/* Search Button */
-#searchButton {
+/* Div contains search logo */
+#searchLogoDiv{
     border-left: 1px solid gray;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100px;
+    width: 15%;
     background-color: rgb(241, 241, 241);
     cursor: pointer;
-    transition: 0.2s;
-}
-#searchButton:hover {
-    background-color: rgb(230, 230, 230);
 }
 
-/* Search Icon */
-.searchIcon {
-    font-size: 22px;
+/* Search logo */
+.searchLogo{
+    font-size: 20px;
     color: gray;
-}
-
-/* Right Section (For Icons) */
-#rightIcons {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-/* Responsive Design */
-@media screen and (max-width: 900px) {
-    #searchContainer {
-        width: 400px;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    #searchContainer {
-        width: 250px;
-    }
-    #rightIcons {
-        display: none;
-    }
 }  
