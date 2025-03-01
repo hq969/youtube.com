@@ -1,112 +1,117 @@
-// Fetch search results from YouTube API
+// API Key (Keep it secure and consider using environment variables in production)
+const API_KEY = "AIzaSyA5GDTr2JVtyk7iqVuasbhlEkMFr-l74n8";
+
+// Search YouTube Videos
 const search = async () => {
     try {
         const query = document.getElementById("query").value.trim();
         if (!query) return; // Prevent empty searches
 
-        const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${query}&key=AIzaSyA5GDTr2JVtyk7iqVuasbhlEkMFr-l74n8`;
+        const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${encodeURIComponent(query)}&key=${API_KEY}`;
 
         const res = await fetch(url);
-        const data = await res.json();
+        if (!res.ok) throw new Error("Failed to fetch search results.");
 
+        const data = await res.json();
         const searchArr = data.items
-            .filter((elem) => elem.id.videoId) // Ensure videoId exists
-            .map((elem) => ({
-                id: elem.id.videoId,
-                snippet: {
-                    publishedAt: elem.snippet.publishedAt,
-                    channelTitle: elem.snippet.channelTitle,
-                    title: elem.snippet.title,
-                    thumbnails: {
-                        medium: {
-                            url: elem.snippet.thumbnails?.medium?.url || "", // Handle missing thumbnails
-                        },
-                    },
-                },
+            .filter((item) => item.id.videoId) // Ensure videoId exists
+            .map((item) => ({
+                id: item.id.videoId,
+                title: item.snippet.title,
+                channelTitle: item.snippet.channelTitle,
+                publishedAt: item.snippet.publishedAt,
+                thumbnail: item.snippet.thumbnails?.medium?.url || "default-thumbnail.jpg",
             }));
 
-        display(searchArr);
+        displayVideos(searchArr);
     } catch (error) {
         console.error("Error fetching search results:", error);
         alert("Failed to fetch search results. Please try again.");
     }
 };
 
-// Fetch trending videos from YouTube API
+// Fetch Trending Videos
 const trending = async () => {
     try {
-        const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&chart=mostPopular&regionCode=IN&maxResults=20&key=AIzaSyDVk2mh02wxr_2df0e76Vbb2EZAMDml67E`;
+        const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&chart=mostPopular&regionCode=IN&maxResults=20&key=${API_KEY}`;
 
         const res = await fetch(url);
-        const data = await res.json();
+        if (!res.ok) throw new Error("Failed to fetch trending videos.");
 
-        await display(data.items);
+        const data = await res.json();
+        const trendingVideos = data.items.map((item) => ({
+            id: item.id,
+            title: item.snippet.title,
+            channelTitle: item.snippet.channelTitle,
+            publishedAt: item.snippet.publishedAt,
+            thumbnail: item.snippet.thumbnails?.medium?.url || "default-thumbnail.jpg",
+        }));
+
+        displayVideos(trendingVideos);
     } catch (error) {
         console.error("Error fetching trending videos:", error);
         alert("Failed to fetch trending videos. Please try again.");
     }
 };
 
-// Display video thumbnails and details
-const display = (data) => {
+// Display Videos
+const displayVideos = (videos) => {
     const videoContainer = document.getElementById("videos");
     videoContainer.innerHTML = ""; // Clear previous content
 
-    data.forEach(({ id, snippet: { publishedAt, channelTitle, title, thumbnails } }) => {
-        const parentDiv = document.createElement("div");
-        parentDiv.className = "video-card";
+    videos.forEach(({ id, title, channelTitle, publishedAt, thumbnail }) => {
+        const videoCard = document.createElement("div");
+        videoCard.className = "video-card";
 
-        // Video thumbnail
-        const imageDiv = document.createElement("div");
-        const image = document.createElement("img");
-        image.src = thumbnails?.medium?.url || "default-thumbnail.jpg"; // Use default image if missing
-        image.alt = title;
+        // Thumbnail
+        const img = document.createElement("img");
+        img.src = thumbnail;
+        img.alt = title;
+        img.className = "thumbnail";
+        img.addEventListener("click", () => playVideo(id, title));
 
-        imageDiv.append(image);
-        imageDiv.className = "thumbnail";
-        imageDiv.addEventListener("click", () => playVideo(id, title));
-
-        // Video details
+        // Video Details
         const detailsDiv = document.createElement("div");
         detailsDiv.className = "video-details";
 
         const titleEl = document.createElement("h3");
         titleEl.textContent = title;
 
-        const channelName = document.createElement("p");
-        channelName.textContent = channelTitle;
+        const channelEl = document.createElement("p");
+        channelEl.textContent = channelTitle;
+        channelEl.className = "channel-name";
 
-        const timePara = document.createElement("p");
-        timePara.textContent = `Uploaded ${timeConverter(publishedAt)}`;
+        const timeEl = document.createElement("p");
+        timeEl.textContent = formatTime(publishedAt);
+        timeEl.className = "video-time";
 
-        detailsDiv.append(titleEl, channelName, timePara);
-        parentDiv.append(imageDiv, detailsDiv);
+        detailsDiv.append(titleEl, channelEl, timeEl);
+        videoCard.append(img, detailsDiv);
 
-        videoContainer.append(parentDiv);
+        videoContainer.append(videoCard);
     });
 };
 
 // Convert published date to human-readable format
-const timeConverter = (dstring) => {
-    const d1 = new Date(dstring);
-    const d2 = new Date();
-
-    const diffDays = Math.floor((d2 - d1) / (1000 * 60 * 60 * 24));
+const formatTime = (dateStr) => {
+    const publishedDate = new Date(dateStr);
+    const now = new Date();
+    const diffMs = now - publishedDate;
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
     if (diffDays === 0) return "Today";
     if (diffDays === 1) return "1 day ago";
     if (diffDays < 30) return `${diffDays} days ago`;
     if (diffDays < 365) return `${Math.floor(diffDays / 30)} months ago`;
-    
+
     return `${Math.floor(diffDays / 365)} years ago`;
 };
 
-// Save video details and navigate to video page
+// Save Video Data and Navigate to Video Page
 const playVideo = (id, title) => {
-    const videoData = { id, title };
-    localStorage.setItem("videoDetails", JSON.stringify(videoData));
+    localStorage.setItem("videoDetails", JSON.stringify({ id, title }));
     window.location.href = "video.html";
 };
 
-// Load trending videos on page load
+// Auto-load trending videos on page load
 trending();
