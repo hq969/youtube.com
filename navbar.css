@@ -15,7 +15,7 @@
 }
 
 /* Left Section: Menu & Logo */
-#leftSection {
+#LogoLinesDiv {
     display: flex;
     align-items: center;
     gap: 20px;
@@ -23,12 +23,12 @@
 
 /* Menu Icon */
 .youtubeMenuIcon {
-    font-size: 24px;
+    font-size: 25px;
     color: #606060;
     cursor: pointer;
     transition: 0.2s;
 }
-.youtubeMenuIcon:hover {
+.youtubeMenuLogo:hover {
     color: black;
 }
 
@@ -57,7 +57,7 @@
     align-items: center;
     border: 1px solid gray;
     width: 600px;
-    height: 40px;
+    height: 60px;
     border-radius: 20px;
     overflow: hidden;
     background-color: white;
@@ -90,7 +90,7 @@
 
 /* Search Icon */
 .searchIcon {
-    font-size: 30px;
+    font-size: 50px;
     color: gray;
 }
 
@@ -116,4 +116,3 @@
         display: none;
     }
 }
-
