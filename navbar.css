@@ -22,13 +22,13 @@
 }
 
 /* Menu Icon */
-.menuIcon {
+.youtubeMenuIcon {
     font-size: 24px;
     color: #606060;
     cursor: pointer;
     transition: 0.2s;
 }
-.menuIcon:hover {
+.youtubeMenuIcon:hover {
     color: black;
 }
 
@@ -44,7 +44,7 @@
 }
 
 /* Search Bar Section */
-#searchSection {
+#searchAudioDiv {
     display: flex;
     align-items: center;
     flex-grow: 1;
@@ -52,7 +52,7 @@
 }
 
 /* Search Bar Container */
-#searchContainer {
+#searchbarLogo {
     display: flex;
     align-items: center;
     border: 1px solid gray;
@@ -116,3 +116,4 @@
         display: none;
     }
 }
+
