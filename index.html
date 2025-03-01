@@ -14,24 +14,39 @@
         <div id="logoLinesDiv">
             <i class="fa-solid fa-bars youtubeMenuLogo"></i>
             <i class="fa-brands fa-youtube youtubeLogo"></i>
+            <span id="youtubeText">YouTube</span>
         </div>
-        
+
         <div id="searchAudioDiv">
             <div id="searchbarLogo">
-                <input id="query" placeholder="Search" aria-label="Search">
+                <input id="query" type="text" placeholder="Search" aria-label="Search">
                 <button id="searchLogoDiv" onclick="search()">
                     <i class="fa-solid fa-magnifying-glass searchLogo"></i>
                 </button>
             </div>
+            <button id="voiceSearch">
+                <i class="fa-solid fa-microphone"></i>
+            </button>
         </div>
 
         <div id="otherLogo">
+            <i class="fa-solid fa-video"></i>
             <i class="fa-solid fa-bell"></i>
             <i class="fa-solid fa-user"></i>
         </div>
     </nav>
     <!-- Navbar ends here -->
 
+    <!-- Sidebar -->
+    <aside id="sidebar">
+        <ul>
+            <li><i class="fa-solid fa-home"></i> Home</li>
+            <li><i class="fa-solid fa-compass"></i> Explore</li>
+            <li><i class="fa-solid fa-play"></i> Subscriptions</li>
+            <li><i class="fa-solid fa-folder"></i> Library</li>
+        </ul>
+    </aside>
+    
     <!-- Video Section -->
     <main id="videos">
         <!-- Videos will be dynamically loaded here -->
