@@ -56,9 +56,9 @@
     display: flex;
     align-items: center;
     border: 1px solid gray;
-    width: 600px;
-    height: 40px;
-    border-radius: 50px;
+    width: 1000px;
+    height: 100px;
+    border-radius: 100px;
     overflow: hidden;
     background-color: white;
 }
@@ -79,7 +79,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 60px;
+    width: 100px;
     background-color: rgb(241, 241, 241);
     cursor: pointer;
     transition: 0.2s;
