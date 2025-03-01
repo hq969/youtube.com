@@ -1,0 +1,50 @@
+#videos {
+    width: 60%;
+    margin: 30px auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Div which contains individual image and details div */
+#parentDiv {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+/* Div which contains view count and time */
+#viewTimeDiv {
+    display: flex;
+    gap: 15px;
+    margin-top: -23px;
+    font-size: 0.9em;
+    color: gray;
+}
+
+/* Div which contains image */
+#imageDiv {
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+#imageDiv:hover {
+    transform: scale(1.05);
+}
+
+.youtubeLogo {
+    cursor: pointer;
+    color: red;
+    font-size: 1.8em;
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    #videos {
+        width: 90%;
+    }
+    
+    #parentDiv {
+        flex-direction: column;
+    }
+}
