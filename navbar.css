@@ -84,13 +84,13 @@
     cursor: pointer;
     transition: 0.2s;
 }
-#searchButton:hover {
+#searchLogoDiv:hover {
     background-color: rgb(230, 230, 230);
 }
 
 /* Search Icon */
 .searchIcon {
-    font-size: 22px;
+    font-size: 30px;
     color: gray;
 }
 
@@ -98,7 +98,7 @@
 #rightSection {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 40px;
 }
 
 /* Responsive Design */
