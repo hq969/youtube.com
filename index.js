@@ -1,117 +1,194 @@
-// API Key (Keep it secure and consider using environment variables in production)
-const API_KEY = "AIzaSyA5GDTr2JVtyk7iqVuasbhlEkMFr-l74n8";
 
-// Search YouTube Videos
-const search = async () => {
-    try {
-        const query = document.getElementById("query").value.trim();
-        if (!query) return; // Prevent empty searches
+let search =async() =>{
 
-        const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${encodeURIComponent(query)}&key=${API_KEY}`;
+    let query=document.getElementById("query").value
+    // console.log(query)
+    let url=`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${query}&key=AIzaSyDVk2mh02wxr_2df0e76Vbb2EZAMDml67E`
+    let res= await fetch(url)
+    let data=await res.json()
+    // console.log(data.items)
+    data1=data.items
+ 
+    let searchArr=[]
+    
+    data1.map((elem)=>{
+        
+        
+        
+        
 
-        const res = await fetch(url);
-        if (!res.ok) throw new Error("Failed to fetch search results.");
+        let obj={
 
-        const data = await res.json();
-        const searchArr = data.items
-            .filter((item) => item.id.videoId) // Ensure videoId exists
-            .map((item) => ({
-                id: item.id.videoId,
-                title: item.snippet.title,
-                channelTitle: item.snippet.channelTitle,
-                publishedAt: item.snippet.publishedAt,
-                thumbnail: item.snippet.thumbnails?.medium?.url || "default-thumbnail.jpg",
-            }));
+            id:elem.id.videoId,
+            snippet: {
+                publishedAt:elem.snippet.publishedAt,
+                channelTitle:elem.snippet.channelTitle,
+                title:elem.snippet.title,
+                thumbnails: { medium :{
+                    url:elem.snippet.thumbnails.medium.url
 
-        displayVideos(searchArr);
-    } catch (error) {
-        console.error("Error fetching search results:", error);
-        alert("Failed to fetch search results. Please try again.");
+                }
+             }
+                
+            },
+            
+
+        }
+       
+        searchArr.push(obj)
+
+
+    })
+    
+
+    display(searchArr)
+
+
+}
+
+
+
+let trending = async() =>{
+
+    let url=`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&chart=mostPopular&regionCode=IN&maxResults=20&key=AIzaSyDVk2mh02wxr_2df0e76Vbb2EZAMDml67E`
+    let res= await fetch(url)
+    let data=await res.json()
+    display(data.items)
+
+}
+
+let display = async(data) =>{
+
+        document.getElementById("videos").innerHTML=null;
+
+        data.map((  { id,snippet:{publishedAt,channelTitle,title,thumbnails:{medium:{url}}} }  )=>{
+
+            let parentDiv=document.createElement("div")
+            parentDiv.setAttribute("id","parentDiv")
+
+            let imageDiv=document.createElement("div")
+            let image=document.createElement("img")
+            image.src=url
+            imageDiv.append(image)
+            imageDiv.setAttribute("id","imageDiv")
+
+            imageDiv.addEventListener("click",()=>{
+                playVideo(id,title);
+            })
+
+
+
+
+        
+            let detailsDiv=document.createElement("div")
+            detailsDiv.setAttribute("id","detailsDiv")
+
+            let title1=document.createElement("h2")
+            title1.textContent=title;
+
+            let viewTimeDiv=document.createElement("div")
+
+
+            let timePara=document.createElement("p")
+            let time=timeConverter(publishedAt)
+            timePara.innerText=`Uploaded ${time}`
+
+            viewTimeDiv.append(timePara)
+
+            let channelName=document.createElement("p")
+            channelName.innerText=channelTitle
+
+            detailsDiv.append(title1,viewTimeDiv,channelName)
+            parentDiv.append(imageDiv,detailsDiv)
+
+            document.getElementById("videos").append(parentDiv)
+
+        })
+
+
+}
+
+trending()
+
+
+let timeConverter=(dstring) =>{
+
+ var date = new Date(dstring);
+ date=(date.toISOString().substring(0, 10))
+ 
+
+var DateDiff = {
+ 
+    inDays: function(d1, d2) {
+        var t2 = d2.getTime();
+        var t1 = d1.getTime();
+ 
+        return Math.floor((t2-t1)/(24*3600*1000));
+    },
+ 
+    inWeeks: function(d1, d2) {
+        var t2 = d2.getTime();
+        var t1 = d1.getTime();
+ 
+        return parseInt((t2-t1)/(24*3600*1000*7));
+    },
+ 
+    inMonths: function(d1, d2) {
+        var d1Y = d1.getFullYear();
+        var d2Y = d2.getFullYear();
+        var d1M = d1.getMonth();
+        var d2M = d2.getMonth();
+ 
+        return (d2M+12*d2Y)-(d1M+12*d1Y);
+    },
+ 
+    inYears: function(d1, d2) {
+        return d2.getFullYear()-d1.getFullYear();
     }
-};
+}
+ 
 
-// Fetch Trending Videos
-const trending = async () => {
-    try {
-        const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&chart=mostPopular&regionCode=IN&maxResults=20&key=${API_KEY}`;
+ 
+var d1 = new Date(date);
+var d2 = new Date();
 
-        const res = await fetch(url);
-        if (!res.ok) throw new Error("Failed to fetch trending videos.");
+let inDay=DateDiff.inDays(d1, d2);
 
-        const data = await res.json();
-        const trendingVideos = data.items.map((item) => ({
-            id: item.id,
-            title: item.snippet.title,
-            channelTitle: item.snippet.channelTitle,
-            publishedAt: item.snippet.publishedAt,
-            thumbnail: item.snippet.thumbnails?.medium?.url || "default-thumbnail.jpg",
-        }));
-
-        displayVideos(trendingVideos);
-    } catch (error) {
-        console.error("Error fetching trending videos:", error);
-        alert("Failed to fetch trending videos. Please try again.");
+    if(inDay<=30){
+        if(inDay==0)
+            return "Today"
+        else if(inDay==1)
+            return `${inDay} Day Ago`
+        else
+            return `${inDay} Days Ago`
     }
-};
+    else if(inDay<=365){
 
-// Display Videos
-const displayVideos = (videos) => {
-    const videoContainer = document.getElementById("videos");
-    videoContainer.innerHTML = ""; // Clear previous content
+        let month=Math.ceil(inDay/30)
 
-    videos.forEach(({ id, title, channelTitle, publishedAt, thumbnail }) => {
-        const videoCard = document.createElement("div");
-        videoCard.className = "video-card";
+        if(month>1)
+            return`${month} Months ago`
+        else    
+            return `${month} Month ago`
 
-        // Thumbnail
-        const img = document.createElement("img");
-        img.src = thumbnail;
-        img.alt = title;
-        img.className = "thumbnail";
-        img.addEventListener("click", () => playVideo(id, title));
+    }
+    else{
+        let year=Math.floor(inDay/365)
+        return `${year} Year`
+    }
 
-        // Video Details
-        const detailsDiv = document.createElement("div");
-        detailsDiv.className = "video-details";
 
-        const titleEl = document.createElement("h3");
-        titleEl.textContent = title;
+}
 
-        const channelEl = document.createElement("p");
-        channelEl.textContent = channelTitle;
-        channelEl.className = "channel-name";
 
-        const timeEl = document.createElement("p");
-        timeEl.textContent = formatTime(publishedAt);
-        timeEl.className = "video-time";
+let playVideo=(id,title)=>{
 
-        detailsDiv.append(titleEl, channelEl, timeEl);
-        videoCard.append(img, detailsDiv);
+    let obj={
+        id:id,
+        title:title
+    }
 
-        videoContainer.append(videoCard);
-    });
-};
+    localStorage.setItem("videoDetails",JSON.stringify(obj))
+    window.location.href="video.html"
 
-// Convert published date to human-readable format
-const formatTime = (dateStr) => {
-    const publishedDate = new Date(dateStr);
-    const now = new Date();
-    const diffMs = now - publishedDate;
-    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-
-    if (diffDays === 0) return "Today";
-    if (diffDays === 1) return "1 day ago";
-    if (diffDays < 30) return `${diffDays} days ago`;
-    if (diffDays < 365) return `${Math.floor(diffDays / 30)} months ago`;
-
-    return `${Math.floor(diffDays / 365)} years ago`;
-};
-
-// Save Video Data and Navigate to Video Page
-const playVideo = (id, title) => {
-    localStorage.setItem("videoDetails", JSON.stringify({ id, title }));
-    window.location.href = "video.html";
-};
-
-// Auto-load trending videos on page load
-trending();
+}
