@@ -15,15 +15,15 @@
 }
 
 /* Left Section: Menu & Logo */
-#LogoLinesDiv {
+#logoLinesDiv {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
 /* Menu Icon */
-.youtubeMenuIcon {
-    font-size: 25px;
+.youtubeMenuLogo {
+    font-size: 24px;
     color: #606060;
     cursor: pointer;
     transition: 0.2s;
@@ -57,14 +57,14 @@
     align-items: center;
     border: 1px solid gray;
     width: 600px;
-    height: 60px;
+    height: 40px;
     border-radius: 20px;
     overflow: hidden;
     background-color: white;
 }
 
 /* Input Field */
-#searchInput {
+#query {
     flex: 1;
     border: none;
     padding: 10px;
@@ -74,7 +74,7 @@
 }
 
 /* Search Button */
-#searchButton {
+#searchLogoDiv {
     border-left: 1px solid gray;
     display: flex;
     align-items: center;
@@ -89,30 +89,30 @@
 }
 
 /* Search Icon */
-.searchIcon {
-    font-size: 50px;
+.searchLogo {
+    font-size: 22px;
     color: gray;
 }
 
 /* Right Section (For Future Icons) */
-#rightSection {
+#rightIcons {
     display: flex;
     align-items: center;
-    gap: 40px;
+    gap: 20px;
 }
 
 /* Responsive Design */
 @media screen and (max-width: 900px) {
-    #searchContainer {
+    #searchbarLogo {
         width: 400px;
     }
 }
 
 @media screen and (max-width: 600px) {
-    #searchContainer {
+    #searchbarLogo {
         width: 250px;
     }
-    #rightSection {
+    #rightIcons {
         display: none;
     }
 }
