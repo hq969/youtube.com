@@ -1,4 +1,4 @@
-t API_KEY = "AIzaSyDVk2mh02wxr_2df0e76Vbb2EZAMDml67E";
+t API_KEY = "AIzaSyA5GDTr2JVtyk7iqVuasbhlEkMFr-l74n8";
 
 const search = async () => {
     let query = document.getElementById("query").value;
