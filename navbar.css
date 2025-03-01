@@ -22,13 +22,13 @@
 }
 
 /* Menu Icon */
-.youtubeMenuLogo {
+.youtubeMenuIcon {
     font-size: 24px;
     color: #606060;
     cursor: pointer;
     transition: 0.2s;
 }
-.youtubeMenuLogo:hover {
+.youtubeMenuIcon:hover {
     color: black;
 }
 
@@ -52,19 +52,19 @@
 }
 
 /* Search Bar Container */
-#searchbarLogo {
+#searchContainer {
     display: flex;
     align-items: center;
     border: 1px solid gray;
     width: 600px;
     height: 40px;
-    border-radius: 20px;
+    border-radius: 50px;
     overflow: hidden;
     background-color: white;
 }
 
 /* Input Field */
-#query {
+#searchInput {
     flex: 1;
     border: none;
     padding: 10px;
@@ -74,7 +74,7 @@
 }
 
 /* Search Button */
-#searchLogoDiv {
+#searchButton {
     border-left: 1px solid gray;
     display: flex;
     align-items: center;
@@ -84,17 +84,17 @@
     cursor: pointer;
     transition: 0.2s;
 }
-#searchLogoDiv:hover {
+#searchButton:hover {
     background-color: rgb(230, 230, 230);
 }
 
 /* Search Icon */
-.searchLogo {
+.searchIcon {
     font-size: 22px;
     color: gray;
 }
 
-/* Right Section (For Future Icons) */
+/* Right Section (For Icons) */
 #rightIcons {
     display: flex;
     align-items: center;
@@ -103,13 +103,13 @@
 
 /* Responsive Design */
 @media screen and (max-width: 900px) {
-    #searchbarLogo {
+    #searchContainer {
         width: 400px;
     }
 }
 
 @media screen and (max-width: 600px) {
-    #searchbarLogo {
+    #searchContainer {
         width: 250px;
     }
     #rightIcons {
