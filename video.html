@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Player</title>
-    <link rel="stylesheet" href="video.css">
+    <title>Video Player - YouTube Clone</title>
     <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="video.css">
     <script src="https://kit.fontawesome.com/8e28a5d788.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -17,12 +17,30 @@
             <i class="fa-solid fa-bars youtubeMenuLogo"></i>
             <i class="fa-brands fa-youtube youtubeLogo"></i>
         </div>
+        <div id="searchAudioDiv">
+            <div id="searchbarLogo">
+                <input id="query" placeholder="Search" aria-label="Search">
+                <button id="searchLogoDiv" onclick="search()">
+                    <i class="fa-solid fa-magnifying-glass searchLogo"></i>
+                </button>
+            </div>
+        </div>
+        <div id="otherLogo">
+            <i class="fa-solid fa-bell"></i>
+            <i class="fa-solid fa-user"></i>
+        </div>
     </nav>
 
     <!-- Video Container -->
-    <div id="results">
-        <iframe id="videoFrame" src="" frameborder="0" allowfullscreen></iframe>
-        <h2 id="videoTitle"></h2>
+    <div id="video-section">
+        <div id="video-player">
+            <iframe id="videoFrame" frameborder="0" allowfullscreen></iframe>
+            <h2 id="videoTitle"></h2>
+        </div>
+        <div id="related-videos">
+            <h3>Related Videos</h3>
+            <div id="suggestions"></div>
+        </div>
     </div>
 
     <script src="video.js"></script>
